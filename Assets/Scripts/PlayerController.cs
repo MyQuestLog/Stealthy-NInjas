@@ -43,11 +43,9 @@ public class PlayerController : MonoBehaviour
         if (_input != Vector3.zero)
         {
 
-            var matrix = Matrix4x4.Rotate(Quaternion.Euler(0,45,0));
+            
 
-            var skewedInput = matrix.MultiplyPoint3x4(_input);
-
-            var relative = (transform.position + skewedInput) - transform.position;
+            var relative = (transform.position + _input.ToIso()) - transform.position;
             var rot = Quaternion.LookRotation(relative, Vector3.up);
 
             //This code allows the implimentation of contoller support and also make the player rotate overtime 
