@@ -6,10 +6,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody _rb;
+
     // Can change this variable to make the player move faster or slower
     [SerializeField] private float _speed = 5;
+
     // This Variable make the player rotate at a set speed comment this out if the player should turn instantly
-    [SerializeField] private float _turnSpeed = 360; 
+    [SerializeField] private float _turnSpeed = 360;
+
+    
 
     private Vector3 _input;
 
@@ -19,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
         GatherInput();
         Look();
+        
     }
 
     //Updating the move function when the update is triggered
