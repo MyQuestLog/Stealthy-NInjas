@@ -5,25 +5,37 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    
     [SerializeField] private Rigidbody _rb;
 
     // Can change this variable to make the player move faster or slower
-    private float _speed;
+        private float _speed;
     public float _walkSpeed;
     public float _sprintSpeed;
 
-    // This Variable make the player rotate at a set speed comment this out if the player should turn instantly
+    // Crouching functions
+    public float _crouchSpeed;
+    public float _crouchYScale;
+    private float _startYScale;
+
+    // This Variable make the player rotate at a set speed comment this out if the player should turn instantly    
     [SerializeField] private float _turnSpeed = 360;
 
-    // Keybinds
-    public KeyCode sprintKey = KeyCode.LeftShift;
-    
+    // Keybinds    
+    public KeyCode _sprintKey = KeyCode.LeftShift;
+    public KeyCode _crouchKey = KeyCode.LeftControl;
 
 
     private Vector3 _input;
 
     
+    //Updated on start
+    private void Start()
+    {
 
+        _startYScale = transform.localScale.y;
+
+    }
 
     //Updating the functions listed bellow
     void Update()
@@ -51,14 +63,23 @@ public class PlayerController : MonoBehaviour
     {
 
         walking,
-        sprinting
+        sprinting,
+        crouching
 
     }
 
     private void StateHandler()
     {
+
+        if (Input.GetKey(_crouchKey))
+        {
+            state = MovementState.crouching;
+            _speed = _crouchSpeed;
+
+        }
+
         //Mode sprinting
-        if(Input.GetKey(sprintKey))
+        if(Input.GetKey(_sprintKey))
         {
 
             state = MovementState.sprinting;
@@ -82,6 +103,22 @@ public class PlayerController : MonoBehaviour
         
         _input = new Vector3(Input.GetAxisRaw("Horizontal"),0,Input.GetAxisRaw("Vertical"));
 
+        //Start Crouch
+        if (Input.GetKeyDown(_crouchKey))
+        {
+
+            transform.localScale = new Vector3(transform.localScale.x, _crouchYScale, transform.localScale.z);
+            _rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+        }
+
+        //Stop Crouch
+        if (Input.GetKeyUp(_crouchKey))
+        {
+
+            transform.localScale = new Vector3(transform.localScale.x, _startYScale, transform.localScale.z);
+            
+
+        }
     }
 
     //Controlling where the player is getting the character to rotate to
