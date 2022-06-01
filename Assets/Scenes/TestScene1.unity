@@ -534,7 +534,7 @@ MonoBehaviour:
   _rb: {fileID: 442615238}
   _walkSpeed: 4
   _sprintSpeed: 8
-  _crouchSpeed: 2
+  _crouchSpeed: 1
   _crouchYScale: 1
   _turnSpeed: 720
   _sprintKey: 304

@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     {
 
         _startYScale = transform.localScale.y;
-
+        _speed = _walkSpeed;
     }
 
     //Updating the functions listed bellow
@@ -71,15 +71,23 @@ public class PlayerController : MonoBehaviour
     private void StateHandler()
     {
 
-        if (Input.GetKey(_crouchKey))
+        if (Input.GetKeyDown(_crouchKey))
         {
             state = MovementState.crouching;
             _speed = _crouchSpeed;
 
         }
 
-        //Mode sprinting
-        if(Input.GetKey(_sprintKey))
+        else if (Input.GetKeyUp(_crouchKey))
+        {
+
+            state = MovementState.walking;
+            _speed = _walkSpeed;
+
+        }
+
+            //Mode sprinting
+            if (Input.GetKeyDown(_sprintKey))
         {
 
             state = MovementState.sprinting;
@@ -88,7 +96,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Mode Walking
-        else
+        else if (Input.GetKeyUp(_sprintKey))
         {
             state = MovementState.walking;
             _speed = _walkSpeed;
