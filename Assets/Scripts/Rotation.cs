@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// A static variable to allow the smooth rotation of objects in the game. Can be used by mulitple instances by using the ToIso function
 public static class IRotation 
 {
 
