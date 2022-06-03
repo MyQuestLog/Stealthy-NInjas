@@ -39,13 +39,13 @@ public class FieldOfView : MonoBehaviour
 
     private IEnumerator FOVRoutine()
     {
-        // Check delay by 0.2 seconds
-        WaitForSeconds wait = new WaitForSeconds(0.2f);
+        // Check delay by 0.1 seconds
+        WaitForSeconds wait = new WaitForSeconds(0.1f);
 
         // Loop the Coroutine unitl the parent object is destoryed or this is disabled
         while (true)
         {
-            // Wait 0.2 seconds before calling the FieldOfViewCheck function
+            // Wait 0.1 seconds before calling the FieldOfViewCheck function
             yield return wait;
             FieldOfViewCheck();
             if (canSeePlayer == true)
